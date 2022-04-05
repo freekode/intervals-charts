@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  intervalsAuth: {
+    login: 'API_KEY', 
+    password: '4iq46fcnj2t8zry0k0s1xen98'
+  }
 };
 
 /*

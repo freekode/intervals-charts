@@ -124,13 +124,12 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.intervalsRepository.getActivityData('i4220599', ['watts']).subscribe(response => {
-      console.log(response)
       document.body.appendChild(Plot.plot({
         y: {
           grid: true
         },
         marks: [
-          Plot.barY(response, {x: "time", y: "watts"}),
+          Plot.rectY(response, Plot.binX({y: 'count'}, {x: 'watts'})),
           Plot.ruleY([0])
         ]
       }));

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as Plot from '@observablehq/plot';
+import { IntervalsRepository } from './intervals.repository';
 
 
 @Component({
@@ -118,20 +119,21 @@ export class AppComponent implements OnInit {
     }
   ]
 
-  constructor() {
+  constructor(private intervalsRepository: IntervalsRepository) {
   }
 
   ngOnInit(): void {
-    const alphabet: any = this.data
-
-    document.body.appendChild(Plot.plot({
-      y: {
-        grid: true
-      },
-      marks: [
-        Plot.barY(alphabet, {x: "letter", y: "frequency"}),
-        Plot.ruleY([0])
-      ]
-    }));
+    this.intervalsRepository.getActivityData('i4220599', ['watts']).subscribe(response => {
+      console.log(response)
+      document.body.appendChild(Plot.plot({
+        y: {
+          grid: true
+        },
+        marks: [
+          Plot.barY(response, {x: "time", y: "watts"}),
+          Plot.ruleY([0])
+        ]
+      }));
+    })
   }
 }
